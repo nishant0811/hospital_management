@@ -2,16 +2,18 @@ const express = require("express");
 const ejs = require("ejs")
 const app = express();
 const bp = require('body-parser')
+const mongoose = require('mongoose')
 app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+mongoose.connect("mongodb+srv://Nishant:nishant1234@cluster0.m0yjk.mongodb.net/hospital?retryWrites=true&w=majority",{ useNewUrlParser: true , useUnifiedTopology: true, useCreateIndex : true, useFindAndModify : false})
 
 const port = 3000 || process.env.PORT
 
 
-app.use("/admindash",require("./routes/api/admindash"))
-
+app.use("/admindash",require("./routes/admin/admindash"));
+app.use("/pullIssues", require("./routes/admin/issues"));
 app.get("/",(req,res)=>{
   res.render("home")
 })
