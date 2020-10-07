@@ -11,7 +11,6 @@ const EmployeeSchema = mongoose.Schema({
   Pass: String,
   UserName:{
     type: String,
-    unique: true
   }
 })
 
