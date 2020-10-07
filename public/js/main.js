@@ -20,10 +20,18 @@ function pullIssues(){
     }
     issue.innerHTML +=`
     <p>Status : ${status}</p>
+    <button type="button" name="button" onclick="updateIssue('${data._id}',1)">Inprogress</button>
+    <button type="button" name="button" onclick="updateIssue('${data._id}',2)">Completed</button>
     `;
     console.log(issue);
     document.querySelector("#content").appendChild(issue)
   })
+  })
+}
+
+function updateIssue(id,value){
+  $.post("/adminDash/upIssue",{id , value}, (data)=>{
+    pullIssues();
   })
 }
 
@@ -62,4 +70,31 @@ function delEmp(user){
     document.querySelector("#content").innerHTML = `
     ${data.message}`
   })
+}
+
+
+function addEmp(){
+  document.querySelector("#content").innerHTML =`
+  <form class="" action="/admindash/addEmp" method="post">
+    <p>Category</p>
+    <input type="text" name="type" value="">
+    <p>Specialization</p>
+    <input type="text" name="spec" value="">
+    <p>Name</p>
+    <input type="text" name="name" value="">
+    <p>Address</p>
+    <textarea name="add" rows="10" cols="80"></textarea>
+    <p>Phone Number</p>
+    <input type="number" name="num" value="">
+    <p>Qualification</p>
+    <input type="text" name="qualification" value="">
+    <p>Email</p>
+    <input type="email" name="email" value="">
+    <p>Password</p>
+    <input type="text" name="pass" value="">
+    <p>Username</p>
+    <input type="text" name="username" value="">
+    <button type="submit" name="button">Submit</button>
+  </form>
+  `
 }
