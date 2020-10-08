@@ -19,6 +19,7 @@ router.post("/",async (req,res)=>{
   catch(e){
     console.log(e);
     res.send("Fail")
+    return;
   }
   res.send("success")
 

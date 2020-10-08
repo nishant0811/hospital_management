@@ -12,8 +12,9 @@ mongoose.connect("mongodb+srv://Nishant:nishant1234@cluster0.m0yjk.mongodb.net/h
 const port = 3000 || process.env.PORT
 
 
-app.use("/admindash",require("./routes/admin/admindash"));
-app.use("/pullIssues", require("./routes/admin/issues"));
+app.use("/admindash",require("./routes/api/admindash"));
+app.use("/pullIssues", require("./routes/api/issues"));
+app.use("/receptionDash",require("./routes/api/receptionDash"))
 app.get("/",(req,res)=>{
   res.render("home")
 })
