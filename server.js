@@ -19,6 +19,8 @@ app.get("/",(req,res)=>{
   res.render("home")
 })
 
+
+
 app.post("/",(req,res)=>{
   console.log(req.body);
 })

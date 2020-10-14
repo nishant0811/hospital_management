@@ -41,3 +41,65 @@ function submitIssue(){
     pullIssues();
   })
 }
+
+
+function showRooms(){
+  $.get("/receptionDash/availRoom" , (data)=>{
+  data.availRooms.forEach(room =>{
+      console.log(room.roomNo);
+    });
+  })
+}
+
+
+function showRoomForm(){
+  document.querySelector("#content").innerHTML= `
+  <input id = "roomDet"type="text" name="query" value="">
+  <button type="button" name="button" onclick="searchRoom()">Search</button>
+  `
+}
+
+function searchPaititentForm(){
+  document.querySelector("#content").innerHTML= `
+  <input id = "pDet"type="text" name="query" value="">
+  <button type="button" name="button" onclick="searchPaititent()">Search</button>
+  `
+}
+
+function searchRoom(){
+  const room = document.querySelector("#roomDet").value;
+  $.post("/receptionDash/roomDetails",{room},(data)=>{
+    const dataa = data.roomDet
+    if(dataa.occupied != 0){
+    document.querySelector("#content").innerHTML= `
+      <p>Paitient Username : ${dataa.paitientId}</p>
+      <p>Room no : ${dataa.roomNo}
+      `
+  }
+  else {
+    document.querySelector("#content").innerHTML= `
+    <p>The Room is empty</p>
+    `
+  }
+  })
+}
+
+function searchPaititent(){
+  const usern = document.querySelector("#pDet").value;
+  $.post("/receptionDash/searchPaititent",{username : usern},(data)=>{
+    console.log(data.user);
+    const user = data.user;
+    document.querySelector("#content").innerHTML= `
+      <p> Name : ${user.name} </p>
+      <p> Address : ${user.add} </p>
+      <p> Doctor : ${user.doc} </p>
+      <p> Age : ${user.age} </p>
+      <p> Email : ${user.email} </p>
+      <p> Phone : ${user.phone} </p>
+      <p> Room : ${user.room} </p>
+      <p> Wardboy : ${user.wardboy} </p>
+      <p> Problem : ${user.prob} </p>
+    `
+    console.log(data);
+  })
+}

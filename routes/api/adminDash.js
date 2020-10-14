@@ -1,6 +1,8 @@
 const express = require('express');
 const Emp = require("../../models/employee")
 const Issues = require('../.././models/issues')
+const Doc = require("../../models/doctors")
+const Wardboy = require("../../models/wardboy")
 const bycrypt = require("bcryptjs")
 const router = express.Router();
 
@@ -41,9 +43,37 @@ router.post("/addEmp",async (req,res)=>{
     Pass: password,
     UserName:req.body.username.toLowerCase()
   });
+  let doctor;
+  let wardboy;
+  if(req.body.type.toLowerCase() == "doctor"){
+
+    doctor = new Doc({
+    name : req.body.name,
+    username : req.body.username.toLowerCase(),
+    paitients : [],
+    specialization : (req.body.spec).toLowerCase().split(","),
+    phone : req.body.num
+  })
+
+}
+else if(req.body.type.toLowerCase() == "wardboy"){
+
+    wardboy = new Wardboy({
+      name : req.body.name,
+      username : req.body.username.toLowerCase(),
+      phone : req.body.num,
+      roomNumber : []
+    })
+}
 
   try{
     await employee.save();
+    if(req.body.type.toLowerCase() == "doctor"){
+    await doctor.save();
+    }
+    else if(req.body.type.toLowerCase() == "wardboy"){
+      await wardboy.save();
+    }
   }
   catch(e){
     console.log(e.message); // If any errors display
@@ -56,7 +86,7 @@ router.post("/addEmp",async (req,res)=>{
 
 // Search for Emplyess
 router.post("/getEmp", async(req,res)=>{
-  const user = await Emp.findOne({UserName : req.body.username })
+  const user = await Emp.findOne({UserName : req.body.username.toLowerCase() })
   console.log(user);
   if(user === null) res.json({message : "User Not Found", status : 404})
   else {
