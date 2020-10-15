@@ -103,3 +103,8 @@ function searchPaititent(){
     console.log(data);
   })
 }
+
+function logout(){
+  $.get("/logout");
+  window.location = "http://localhost:3000/login"
+}

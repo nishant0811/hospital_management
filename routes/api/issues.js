@@ -5,6 +5,7 @@ const Issues = require('../.././models/issues')
 
 router.get("/",async (req,res)=>{
     const issues = await Issues.find();
+    console.log(req.cookies);
     res.send(issues);
 })
 

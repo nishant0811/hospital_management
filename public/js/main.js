@@ -98,3 +98,9 @@ function addEmp(){
   </form>
   `
 }
+
+
+function logout(){
+  $.get("/logout");
+  window.location = "http://localhost:3000/login"
+}

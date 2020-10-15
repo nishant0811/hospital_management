@@ -3,12 +3,22 @@ const Room = require("../../models/rooms");
 const Paitient = require("../../models/paitient");
 const Doc = require("../../models/doctors");
 const Wardboy = require("../../models/wardboy");
+const verify = require("../../middleware/verify")
 const bycrypt = require("bcryptjs");
 const router = express.Router();
 
 
 
-router.get("/",(req,res)=>{
+router.get("/",verify,(req,res)=>{
+    console.log(req.dataa);
+  if(req.auth == "Not allowed" || !req.auth){
+    res.redirect("/login");
+    return;
+  }
+  else if (req.dataa.type != 'receptionisht') {
+    res.redirect("/login");
+    return;
+  }
   res.render("receptionDash");
 })
 

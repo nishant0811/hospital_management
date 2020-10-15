@@ -3,11 +3,20 @@ const Emp = require("../../models/employee")
 const Issues = require('../.././models/issues')
 const Doc = require("../../models/doctors")
 const Wardboy = require("../../models/wardboy")
+const verify = require("../../middleware/verify")
 const bycrypt = require("bcryptjs")
 const router = express.Router();
 
 // Load the general Dashboard
-router.get("/",(req,res)=>{
+router.get("/",verify,(req,res)=>{
+  if(req.auth == "Not allowed" || !req.auth){
+    res.redirect("/login");
+    return;
+  }
+  else if(req.dataa.type != 'admin') {
+    res.redirect("/login");
+    return;
+  }
   res.render("adminDash")
 })
 
@@ -87,7 +96,6 @@ else if(req.body.type.toLowerCase() == "wardboy"){
 // Search for Emplyess
 router.post("/getEmp", async(req,res)=>{
   const user = await Emp.findOne({UserName : req.body.username.toLowerCase() })
-  console.log(user);
   if(user === null) res.json({message : "User Not Found", status : 404})
   else {
     res.json({user : user , status : 200});
@@ -99,7 +107,15 @@ router.post("/getEmp", async(req,res)=>{
 // Delete Those EMplyoess
 router.post("/delEmp",async(req,res)=>{
   try{
+    const category = await Emp.findOne({UserName : req.body.user.toLowerCase()})
     const user = await Emp.findOneAndDelete({UserName : req.body.user.toLowerCase()})
+    // console.log(category.Type);
+    switch(category.Type){
+      case 'doctor' :
+          const doctor = await Doc.findOneAndDelete({username : req.body.user.toLowerCase()});
+          console.log("Found and deleted");
+          break;
+    }
   }
   catch(e){
     console.log(e);
