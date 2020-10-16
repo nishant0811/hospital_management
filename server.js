@@ -22,11 +22,12 @@ app.use("/docDash",require("./routes/api/docDash"));
 app.use("/paitientDash",require("./routes/api/paitientDash"));
 app.use("/wardDash",require("./routes/api/wardDash"));
 app.use("/login" , require("./routes/api/login"));
+app.use("/paitientlogin",require("./routes/api/paitientlogin"))
 app.use("/logout",require("./routes/api/logout"));
 
 
 app.get("/",(req,res)=>{
-  res.send("Server is up")
+  res.render("home")
 })
 
 

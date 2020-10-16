@@ -10,7 +10,6 @@ const router = express.Router();
 
 
 router.get("/",verify,(req,res)=>{
-    console.log(req.dataa);
   if(req.auth == "Not allowed" || !req.auth){
     res.redirect("/login");
     return;
@@ -19,7 +18,7 @@ router.get("/",verify,(req,res)=>{
     res.redirect("/login");
     return;
   }
-  res.render("receptionDash");
+  res.render("receptionDash",{ name : req.dataa.name });
 })
 
 router.get("/availRoom",async (req,res)=>{
@@ -55,7 +54,8 @@ router.post("/addPaitient",async (req,res)=>{
     email:req.body.email,
     wardboy:req.body.wardboy.toLowerCase(),
     pass:password,
-    username:req.body.username.trim().toLowerCase()
+    username:req.body.username.trim().toLowerCase(),
+    type : 'patitent'
   })
   try{
 
@@ -74,7 +74,7 @@ router.post("/addPaitient",async (req,res)=>{
    console.log(ward.roomNumber);
    await Wardboy.findOneAndUpdate({username : newPaitient.wardboy},{roomNumber : ward.roomNumber})
    await newPaitient.save();
-   res.send("Done")
+   res.redirect("/receptionDash")
   }
   catch(e){
     console.log(e);
@@ -86,11 +86,40 @@ else{
     message : "User already exists"
   })
 }
+})
 
+router.post("/delPaitient" , async(req,res)=>{
+  try{
+    const paititent = await Paitient.findOne({username : req.body.usern})
+    await Paitient.findOneAndDelete({username : req.body.usern})
+    const pati = await Doc.findOne({username : paititent.doc});
+    console.log(pati.paitients.indexOf(req.body.usern));
+    pati.paitients.splice(pati.paitients.indexOf(req.body.usern),1)
+    console.log(pati.paitients);
+    await Doc.findOneAndUpdate({username : paititent.doc} , {paitients : pati.paitients})
+    await Room.findOneAndUpdate({roomNo : parseInt(paititent.room)},{occupied : 0 , paitientId : '' , wardboy :''})
+    const ward = await Wardboy.findOne({username : paititent.wardboy});
+    console.log(ward.roomNumber.indexOf(paititent.room));
+    ward.roomNumber.splice(ward.roomNumber.indexOf(paititent.room),1);
+    console.log(ward.roomNumber);
+    await Wardboy.findOneAndUpdate({username : paititent.wardboy} , {roomNumber : ward.roomNumber})
+    res.send("Done")
+  }
+  catch(e){
+    console.log(e);
+    res.send(e.message)
+  }
 })
 router.post("/roomDetails", async (req,res)=>{
+  try{
+
   const roomDet = await Room.findOne({roomNo : parseInt(req.body.room)});
-  res.send({ roomDet})
+  const patitent = await Paitient.findOne({username : roomDet.paitientId})
+  res.send({ roomDet , patitent})
+}
+catch(e){
+  res.send(e.message)
+}
 })
 
 
@@ -99,14 +128,7 @@ router.post("/searchPaititent", async(req,res)=>{
   res.send({ user })
 })
 
-router.post("/deletePaititent", async(req,res)=>{
-  try{
-    await Paitient.findOneAndDelete({username :req.body.username.trim().toLowerCase()})
-  }
-  catch(e){
-    console.log(e);
-  }
-})
+
 
 
 module.exports = router;

@@ -17,7 +17,7 @@ router.get("/",verify,(req,res)=>{
     res.redirect("/login");
     return;
   }
-  res.render("adminDash")
+  res.render("adminDash",{ name : req.dataa.name })
 })
 
 router.post("/upIssue", async(req,res)=>{

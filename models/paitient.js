@@ -12,7 +12,8 @@ const PaitienSchema = mongoose.Schema({
   email : String,
   wardboy : String,
   pass : String,
-  username:String
+  username:String,
+  type : String,
 })
 
 module.exports = mongoose.model("Paitient",PaitienSchema);

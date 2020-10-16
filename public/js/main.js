@@ -1,8 +1,8 @@
 function pullIssues(){
   $.get("/pullIssues",(datas)=>{
     document.querySelector("#content").innerHTML =""
-    datas.forEach(data =>{
-
+    for(let i = datas.length-1;i>=0;i--){
+     let data = datas[i];
     let issue = document.createElement('div');
     issue.innerHTML += `
     <p>${data.issue}</p>
@@ -20,12 +20,13 @@ function pullIssues(){
     }
     issue.innerHTML +=`
     <p>Status : ${status}</p>
-    <button type="button" name="button" onclick="updateIssue('${data._id}',1)">Inprogress</button>
-    <button type="button" name="button" onclick="updateIssue('${data._id}',2)">Completed</button>
+    <button type="button" class="bg-warning"name="button" onclick="updateIssue('${data._id}',1)">Inprogress</button>
+    <button type="button" class ="bg-success"name="button" onclick="updateIssue('${data._id}',2)">Completed</button>
+    <hr>
     `;
     console.log(issue);
     document.querySelector("#content").appendChild(issue)
-  })
+  }
   })
 }
 
@@ -39,7 +40,7 @@ function showSearch(){
   document.querySelector("#content").innerHTML = `
   <p>Enter the username</p>
   <input id='username' type="text" name="username" value="">
-  <button type="button" name="button" onclick="pullEmpDet()">search</button>
+  <button type="button" class="btn btn-primary"name="button" onclick="pullEmpDet()">search</button>
   `
 }
 
@@ -53,7 +54,7 @@ function pullEmpDet(){
     <p>Specialization : ${data.user.Specialization}</p>
     <p>Email : ${data.user.Email}</p>
     <p>Phone : ${data.user.PhoneNum}</p>
-    <button type="button" name="button" onclick="delEmp('${data.user.UserName}')">Remove</button>
+    <button type="button" class="btn btn-danger"name="button" onclick="delEmp('${data.user.UserName}')">Remove</button>
     `
   }
   else{
@@ -94,7 +95,7 @@ function addEmp(){
     <input type="text" name="pass" value="">
     <p>Username</p>
     <input type="text" name="username" value="">
-    <button type="submit" name="button">Submit</button>
+    <button class="btn btn-primary" type="submit" name="button">Submit</button>
   </form>
   `
 }
