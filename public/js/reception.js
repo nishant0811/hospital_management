@@ -147,7 +147,7 @@ function searchPaititent(){
 }
 function delPait(usern){
   $.post("/receptionDash/delPaitient", {usern} , (data) =>{
-    document.querySelector("#content") = `<p> ${data}</p>`
+    document.querySelector("#content").innerHTML = `<p> ${data}</p>`;
 
   })
 }

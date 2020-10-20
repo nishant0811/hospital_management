@@ -9,6 +9,10 @@ button{
   margin-bottom: 2px;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 .sign-in {
   font-style: normal;
   font-weight: 500;
@@ -204,30 +208,7 @@ input{
   border-bottom: 2px solid #D3D8DD;
 }
 
-.btn{
-  background: #109CF1;
-  width: 100%;
 
-box-shadow: 0 4px 10px rgba(16, 156, 241, 0.24);
-border-radius: 4px;
-font-family: Poppins;
-font-style: normal;
-font-weight: 600;
-font-size: 13px;
-line-height: 20px;
-/* identical to box height, or 154% */
-
-text-align: center;
-letter-spacing: 0.1px;
-
-/* Neutral / White */
-
-color: #FFFFFF;
-}
-
-.btn-primary:hover{
-    background-color:  #109CF1;
-}
 
 
 
@@ -346,6 +327,56 @@ margin: 8px 0px;
 
   .containerf{
     margin-left: 15%;
+  }
+
+}
+
+.main{
+  height: 100%;
+  background-image:linear-gradient(to left top,
+    rgba(15, 76, 117, 0.8) ,
+    rgba(50, 130, 184, 0.8),
+    rgba(187, 225, 250, 0.8)  ),
+     url(../img/nat-9.jpg);
+
+  background-position: top;
+  background-size: cover;
+}
+
+.homenav nav{
+  animation-name: fadein;
+}
+
+.homeconatiner{
+  animation-name: moveleft;
+}
+
+@keyframes fadein {
+  0%{
+    opacity: 0
+  }
+
+  100%{
+    opacity: 1
+  }
+
+}
+
+
+@keyframes moveleft {
+
+  0%{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  80%{
+    transform: translateX(10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translate(0);
   }
 
 }

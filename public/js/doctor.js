@@ -5,14 +5,20 @@ function logout(){
 
 function getPaitients(){
   $.get("/docDash/getPaitients",(data)=>{
+    document.querySelector("#content").innerHTML =''
     if(data.length != 0){
       data.forEach(paitient =>{
-        document.querySelector("#content").innerHTML =
+        document.querySelector("#content").innerHTML +=
         `
         <p>Username : ${paitient}</p>
         <button type="button" class="btn-primary" name="button" onclick="moredet('${paitient}')">More Info</button>
         `
       })
+    }
+    else{
+        document.querySelector("#content").innerHTML +=`
+        <p>No Paitients to take care Currently</p>
+        `
     }
   })
 }

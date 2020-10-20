@@ -21,6 +21,7 @@ router.get("/",verify, (req,res)=>{
 router.get("/getPaitients" ,verify,async(req,res)=>{
     try{
       const doc = await Doctor.findOne({username : req.dataa.username})
+      console.log(doc.paitients);
       res.send(doc.paitients)
     }
     catch(e){
