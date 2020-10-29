@@ -1,9 +1,11 @@
 function pullIssues(){
   $.get("/pullIssues",(datas)=>{
+      document.querySelector("#content").classList.remove("issue_form");
     document.querySelector("#content").innerHTML =""
     for(let i = datas.length-1;i>=0;i--){
      let data = datas[i];
     let issue = document.createElement('div');
+    issue.classList.add("issue_form");
     issue.innerHTML += `
     <p>${data.issue}</p>
     `;
@@ -20,7 +22,6 @@ function pullIssues(){
     }
     issue.innerHTML +=`
     <p>Status : ${status}</p>
-    <hr>
     `;
     console.log(issue);
     document.querySelector("#content").appendChild(issue)
@@ -30,6 +31,7 @@ function pullIssues(){
 
 
 function showSearchIssue(){
+  document.querySelector("#content").classList.add("issue_form");
   document.querySelector("#content").innerHTML= `
   <p>Enter details of the issue</p>
   <input id = "issue"type="text" name="query" value="" placeholder+"Your Issue">
@@ -47,19 +49,26 @@ function submitIssue(){
 
 function showRooms(){
   $.get("/receptionDash/availRoom" , (data)=>{
+    document.querySelector("#content").classList.remove("issue_form");
     document.querySelector("#content").innerHTML= `
+    <div id="roomsDett" class="availRooms">
+    </div>
     `
-
+    for(let i=100 ; i<200;i++){
+      document.querySelector("#roomsDett").innerHTML += `
+        <div class="roomdett" id="${i}">
+        <p style="padding : 10px;">Room Number  ${i}</p>
+        </div>
+      `
+    }
   data.availRooms.forEach(room =>{
-    document.querySelector("#content").innerHTML += `
-      <p>Room Number : ${room.roomNo}</p>
-      <hr>
-    `
+    document.getElementById(room.roomNo.toString()).classList.add("Availl");
     });
   })
 }
 
 function showForm(){
+  document.querySelector("#content").classList.add("issue_form");
   document.querySelector("#content").innerHTML =`
   <form action="/receptionDash/addPaitient" method="POST">
     <p>Name :</p>
@@ -81,7 +90,7 @@ function showForm(){
     <p>Wardboy :</p>
     <input type="text" name="wardboy" value="" placeholder="wardboy">
     <p>Password :</p>
-    <input type="text" name="pass" value="" placeholder="Password">
+    <input type="Password" name="pass" value="" placeholder="Password">
     <p>Username :</p>
     <input type="text" name="username" value="" placeholder="username">
     <button type="submit" class="btn btn-primary" style="width : auto;" name="button">Submit</button>
@@ -91,6 +100,7 @@ function showForm(){
 
 
 function searchPaititentForm(){
+  document.querySelector("#content").classList.add("issue_form");
   document.querySelector("#content").innerHTML= `
   <p>Enter Paitient Username :</p>
   <input id = "pDet"type="text" name="query" value="">
@@ -99,6 +109,7 @@ function searchPaititentForm(){
 }
 
 function searchRoom(){
+  document.querySelector("#content").classList.add("issue_form");
   const room = document.querySelector("#roomDet").value;
   $.post("/receptionDash/roomDetails",{room},(data)=>{
     const dataa = data.roomDet
@@ -118,6 +129,7 @@ function searchRoom(){
 }
 
 function searchPaititent(){
+  document.querySelector("#content").classList.add("issue_form");
   const usern = document.querySelector("#pDet").value;
   $.post("/receptionDash/searchPaititent",{username : usern},(data)=>{
     if(data.user){
@@ -152,6 +164,7 @@ function delPait(usern){
   })
 }
 function showRoomForm(){
+  document.querySelector("#content").classList.add("issue_form");
   document.querySelector("#content").innerHTML= `
     <p>Enter the room Number</p>
     <input id="room" type="text" name="room"  placeholder="Room Number">
@@ -159,6 +172,7 @@ function showRoomForm(){
     `
 }
 function searchRoomDet(){
+  document.querySelector("#content").classList.add("issue_form");
   $.post("/receptionDash/roomDetails", {room : document.querySelector("#room").value},(data)=>{
   if(data.roomDet){
     if(data.roomDet.occupied == 1){

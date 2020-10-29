@@ -7,6 +7,7 @@ function logout(){
 function getRooms(){
   $.get("/wardDash/showRoom" , (data)=>{
     console.log(data);
+    document.querySelector("#content").classList.add("issue_form");
     document.querySelector("#content").innerHTML = ''
     if(data.length!=0){
       data.forEach(room =>{

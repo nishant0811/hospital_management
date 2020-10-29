@@ -10,7 +10,9 @@
   </head>
   <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary ">
-    <a class="navbar-brand" href="/">ANP Hospital</a>
+      <div class="container">
+
+    <a class="navbar-brand" href="/" style="text-shadow: 0 5px 3px rgba(0, 0, 0, 0.25);">ANP Hospital</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,17 +27,18 @@
     </li>
     </ul>
     </div>
+  </div>
     </nav>
     <div class="container">
     <div class="my-4 py-4" style="display : inline-block; text-align:center; margin : auto; width:100%;" >
       <h1 class="mb-4">Hello, <%=name%> </h1>
-      <button type="button"class="btn btn-primary" style="width : auto;" name="button" onClick="getDoc()">Doctors Details</button>
-      <button type="button"class="btn btn-primary" style="width : auto;" name="button" onClick="getMeds()">Medicene Details</button>
-      <button type="button"class="btn btn-primary" style="width : auto;" name="button" onClick="getRoom()">Room number</button>
-      <button type="button"class="btn btn-primary" style="width : auto;" name="button" onClick="getWard()">Wardboy Details</button>
-      <button type="button"class="btn btn-primary" style="width : auto;" name="button" onclick="logout()">Logout</button>
+      <button type="button"class="btn btn-primarry mx-2" style="width : auto;" name="button" onClick="getDoc()">Doctors Details</button>
+      <button type="button"class="btn btn-primarry mx-2" style="width : auto;" name="button" onClick="getMeds()">Medicene Details</button>
+      <button type="button"class="btn btn-primarry mx-2" style="width : auto;" name="button" onClick="getRoom()">Room number</button>
+      <button type="button"class="btn btn-primarry mx-2" style="width : auto;" name="button" onClick="getWard()">Wardboy Details</button>
+      <button type="button"class="btn btn-primarry mx-2" style="width : auto;" name="button" onclick="logout()">Logout</button>
         <div id="content" class="mt-4 pt-4">
-          
+
         </div>
 </div>
 </div>

@@ -45,8 +45,7 @@ catch(e){
 router.get("/wardDet",verify,async(req,res)=>{
   try{
     const user = await Paitient.findOne({username : req.dataa.username})
-    const ward = await Wardboy.findOne({username : user.wardboy})
-    console.log(ward);
+    const ward = await Wardboy.findOne({username : user.wardboy});
     res.send(ward)
   }
   catch(e){
@@ -56,8 +55,7 @@ router.get("/wardDet",verify,async(req,res)=>{
 
 router.get("/roomNo",verify,async(req,res)=>{
   try{
-    const user = await Paitient.findOne({username : req.dataa.username})
-    console.log(user.room);
+    const user = await Paitient.findOne({username : req.dataa.username});
   res.send({room :user.room})
   }
   catch(e){
