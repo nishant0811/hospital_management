@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Login</title>
+  <title>Reset</title>
   <!-- CSS only -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
@@ -19,15 +19,14 @@
         <a href="/"><p>ANP Hospital Management System </p></a>
       </div>
     </div>
-    <h2 class="sign-in">Sign In</h2>
-    <form action="/login" method="post">
+    <h2 class="sign-in">Reset Password</h2>
+    <form action="/res/ereset" method="post">
       <div class="input-box">
-        <input class='input' type="text" name="username" placeholder="Username">
         <input class='input' type="password" name="password" placeholder="Password">
+        <input type="hidden" name="token" value="<%=token%>">
       </div>
-      <button class="btn btn-primaryy buton"type="submit" name="button"><p>Sign In</p></button>
+      <button class="btn btn-primaryy buton"type="submit" name="button"><p>Reset</p></button>
     </form>
-      <a class="btn btn-primaryy buton" href="/ereset" name="button"><p>Forget Password</p></a>
   </div>
 </div>
 

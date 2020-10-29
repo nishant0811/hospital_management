@@ -24,6 +24,9 @@ app.use("/wardDash",require("./routes/api/wardDash"));
 app.use("/login" , require("./routes/api/login"));
 app.use("/paitientlogin",require("./routes/api/paitientlogin"))
 app.use("/logout",require("./routes/api/logout"));
+app.use("/ereset",require("./routes/api/ereset"));
+app.use("/preset",require("./routes/api/preset"));
+app.use("/res",require("./routes/api/res"));
 
 
 app.get("/",(req,res)=>{
