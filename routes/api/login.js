@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/" ,verify, (req,res)=>{
   if(req.auth == "Not allowed")
-    res.render("login");
+    res.render("Login");
   else{
     switch(req.dataa.type){
       case 'doctor':

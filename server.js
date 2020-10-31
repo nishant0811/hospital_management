@@ -15,14 +15,14 @@ mongoose.connect("mongodb+srv://Nishant:nishant1234@cluster0.m0yjk.mongodb.net/h
 const port = 3000 || process.env.PORT
 
 
-app.use("/admindash",require("./routes/api/admindash"));
+app.use("/admindash",require(__dirname+"/routes/api/adminDash.js"));
 app.use("/pullIssues", require("./routes/api/issues"));
 app.use("/receptionDash",require("./routes/api/receptionDash"));
 app.use("/docDash",require("./routes/api/docDash"));
 app.use("/paitientDash",require("./routes/api/paitientDash"));
 app.use("/wardDash",require("./routes/api/wardDash"));
 app.use("/login" , require("./routes/api/login"));
-app.use("/paitientlogin",require("./routes/api/paitientlogin"))
+app.use("/paitientlogin",require("./routes/api/paitientLogin"))
 app.use("/logout",require("./routes/api/logout"));
 app.use("/ereset",require("./routes/api/ereset"));
 app.use("/preset",require("./routes/api/preset"));
