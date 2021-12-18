@@ -13,8 +13,8 @@ async function main(email , token) {
      port: 465,
      secure: true, // use SSL
       auth: {
-        user: "renegade.plays03@gmail.com", // generated ethereal user
-        pass: "nishant.singh@1", // generated ethereal password
+        user: "", // generated ethereal user
+        pass: "", // generated ethereal password
       },
     });
 
